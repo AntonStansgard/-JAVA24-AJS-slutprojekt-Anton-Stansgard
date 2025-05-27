@@ -1,0 +1,136 @@
+/* Keep the same CSS as before */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.add-member {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+}
+
+input, select, button {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3367d6;
+}
+
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.members-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.member-item {
+    background: white;
+    border: 1px solid #eee;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Task Creation Form Styles */
+.add-task {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: white; /* Changed from #f8f9fa for consistency */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Added shadow to match new style */
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.form-group {
+  flex: 1;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #555;
+}
+
+/* Task Display Styles */
+.task-item {
+  background: white;
+  border-left: 4px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Category Colors */
+.task-item.frontend { border-left-color: #4285f4; }
+.task-item.backend { border-left-color: #34a853; }
+.task-item.ux { border-left-color: #fbbc05; }
+.task-item.qa { border-left-color: #ea4335; }
+
+/* Status Styles */
+.status-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.status-badge.new { background: #e3f2fd; color: #1976d2; }
+.status-badge.in-progress { background: #fff8e1; color: #ffa000; }
+.status-badge.done { background: #e8f5e9; color: #388e3c; }
+
+/* Meta Information */
+.task-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.task-meta .category {
+  text-transform: capitalize;
+}
