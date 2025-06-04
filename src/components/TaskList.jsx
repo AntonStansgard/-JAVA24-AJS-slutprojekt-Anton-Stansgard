@@ -33,11 +33,13 @@ export default function TasksList() {
     return () => unsubscribe(); 
   }, []);
 
+  // useEffect: Hämtar teammedlemmar från Firebase
   useEffect(() => {
-    const membersRef = ref(db, 'members');
+    const membersRef = ref(db, 'members');  // Referens till "members" i Firebase
     const unsubscribe = onValue(membersRef, (snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val();
+        // Omvandlar objekt till array med ID som nyckel
         const array = Object.entries(data).map(([id, member]) => ({ id, ...member }));
         setMembers(array);
       } else {
@@ -48,19 +50,21 @@ export default function TasksList() {
     return () => unsubscribe(); 
   }, []);
 
-  // Funktion för att hantera statusändring eller borttagning av uppgift
+  // Funktion för att hantera statusändring 
   const handleStatusChange = async (taskId, newStatus, assignedTo = null) => {
     const taskRef = ref(db, `tasks/${taskId}`); 
     try {
-      if (newStatus === 'done') {
-        const confirmed = window.confirm('Are you sure you want to mark this task as finished? It will be permanently deleted.');
+      if (newStatus === 'delete') {
+        // Bekräftelse innan permanent borttagning
+        const confirmed = window.confirm('Are you sure you want to delete this task permanently?');
         if (!confirmed) return;
-        await remove(taskRef);  
+        await remove(taskRef);  // Ta bort uppgift från Firebase
       } else {
+        // Uppdatera status eller tilldelad medlem
         await update(taskRef, {
           status: newStatus,
           updatedAt: new Date().toISOString(),
-          ...(assignedTo !== null && { assignedTo }) 
+          ...(assignedTo !== null && { assignedTo }) // Endast om tilldelad medlem anges
         });
       }
     } catch (error) {
@@ -69,6 +73,7 @@ export default function TasksList() {
     }
   };
 
+  // Skapar en lista med unika kategorier
   const categories = [...new Set(tasks.map((t) => t.category))];
 
   // Filtrering och sortering av uppgifter 
@@ -92,6 +97,7 @@ export default function TasksList() {
   // Filtrerar uppgifter på status till varje TaskSection
   const groupByStatus = (status) => filteredTasks.filter((task) => task.status === status);
 
+  // Visar laddningsindikator medan data hämtas
   if (loading) return <div className="loading">Loading tasks...</div>;
 
   return (
